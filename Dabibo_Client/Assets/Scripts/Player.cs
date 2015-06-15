@@ -24,7 +24,7 @@ public class Player : AttackingObj
 		#if UNITY_EDITOR || UNITY_WEBPLAYER
 		if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 		{
-			AttemptAttack<Enemy>(targetEnemy);
+			//AttemptAttack<Enemy>(targetEnemy);
 		}
 		#elif UNITY_ANDROID || UNITY_IPHONE
 		foreach(Touch touch in Input.touches)
@@ -47,5 +47,15 @@ public class Player : AttackingObj
 	{
 		Enemy hitEnemy = component as Enemy;
 		hitEnemy.DamageEnemy(GameMgr.instance.PlayerHitDamage);
+	}
+
+	public void Attack()
+	{	
+		AttemptAttack<Enemy>(targetEnemy);
+	}
+
+	public void ReSetEnemyTrans()
+	{
+		targetEnemy = GameObject.FindGameObjectWithTag("Enemy").transform;
 	}
 }

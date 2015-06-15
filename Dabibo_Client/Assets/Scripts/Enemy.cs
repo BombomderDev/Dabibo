@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Enemy : AttackingObj
 {
-	private int nowHp = 1;
+	private int nowHp = 10;
 	private Animator animator;
 	public GameObject loseHpEffectObj;
 	public GameObject gainMoneyEffectObj;
@@ -14,13 +14,11 @@ public class Enemy : AttackingObj
 	{
 		nowHp = GameMgr.instance.EnemyMaxHp;
 		animator = GetComponent<Animator>();
-
 		base.Start();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
 	protected override void AttemptAttack<T>(Transform target)
@@ -57,7 +55,14 @@ public class Enemy : AttackingObj
 			effectObj.transform.localScale = Vector3.one;
 			effectObj.transform.Find("GainMoney").GetComponent<Text>().text = "+" + gainMoney + " Money";
 			effectObj.AddComponent<DestroyAtTime>().time = 0.8f;
-			Application.LoadLevel(Application.loadedLevel);
+			//Application.LoadLevel(Application.loadedLevel);
+			Destroy(this.gameObject);
+			GameMgr.instance.EnemyKillCount ++;
+
+			if(GameMgr.instance.EnemyKillCount >= 2)
+			{
+				GameMgr.instance.ShowGameOver();
+			}
 		}
 	}
 
