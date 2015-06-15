@@ -38,6 +38,7 @@ public class Enemy : AttackingObj
 		animator.SetTrigger("enemyChop");
 		GameObject effectObj = Instantiate(loseHpEffectObj, Vector3.zero, Quaternion.identity) as GameObject;
 		effectObj.transform.parent = GameMgr.instance.UICanvasObj.transform;
+		effectObj.transform.localPosition = Vector3.zero;
 		effectObj.transform.localScale = Vector3.one;
 		effectObj.transform.Find("LoseHp").GetComponent<Text>().text = "-"+GameMgr.instance.PlayerHitDamage;
 		effectObj.AddComponent<DestroyAtTime>().time = 0.8f;
@@ -53,6 +54,7 @@ public class Enemy : AttackingObj
 			GameObject effectObj = Instantiate(gainMoneyEffectObj, Vector3.zero, Quaternion.identity) as GameObject;
 			effectObj.transform.parent = GameMgr.instance.UICanvasObj.transform;
 			effectObj.transform.localScale = Vector3.one;
+			effectObj.transform.localPosition = Vector3.zero;
 			effectObj.transform.Find("GainMoney").GetComponent<Text>().text = "+" + gainMoney + " Money";
 			effectObj.AddComponent<DestroyAtTime>().time = 0.8f;
 			//Application.LoadLevel(Application.loadedLevel);
